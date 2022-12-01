@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    font-size: 4em;
+    color: white;
+}
+
+.wrapper {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    perspective: 300px;
+    /* ppv is z axis  */
+}
+
+
+/* intro and outro are like static  */
+
+.intro_screen {
+    height: 100vh;
+    background-color: tomato;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.outro_screen {
+    height: 100vh;
+    background-color: teal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parallax-group {
+    position: relative;
+    height: 100vh;
+    transform-style: preserve-3d;
+}
+
+.parallax-layer {
+    position: absolute;
+    /* positioning absolute means it can move freely under parent ie parallax group */
+    inset: 0;
+    /* inset means it feels up whole page  */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#intro {
+    z-index: 0;
+}
+
+#g1 {
+    z-index: -1;
+}
+
+#g1>.base_layer {
+    background-color: crimson;
+}
+
+#g2 {}
+
+#g2>.mid_layer {
+    background-color: yellowgreen;
+}
+
+#g3 {}
+
+
+/* css for parallax */
+
+.base_layer {
+    /* calc 1+(-translateZ/perspective) */
+    /* base layer will move slow */
+    transform: translateZ(-300px) scale(2);
+}
+
+.mid_layer {
+    /* mid layer  */
+    transform: translateZ(0);
+}
+
+.top_layer {
+    /* brings closer as it intial distance was 300px but now is 300-210=90 its not 300 far its 90 far i.e closer */
+    transform: translateZ(210px) scale(0.3);
+}
